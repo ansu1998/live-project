@@ -1,0 +1,10 @@
+{% extends 'training/base.html' %}
+
+{% block content %}
+<form action="{% url 'training:view_batch' bat.id %}" method="POST">
+    {% csrf_token %}
+
+    <button type="submit" ,
+            onclick="{% url 'training:view_batch' bat.id %}"> Remove </button>
+</form>
+{% endblock content %}

@@ -1,0 +1,122 @@
+{% extends 'training/base.html' %}
+{% block content %}
+
+<div class="data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1>Batch<span class="table-project-n">Details</span> Table</h1>
+                        </div>
+                    </div>
+                    <div class="sparkline13-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+
+                            <div class="button-style-four btn-mg-b-10">
+                                <button type="button" class="btn btn-custon-rounded-four btn-danger" style="margin-left: 67em;" onClick="location.href='{% url 'training:add_batch' course_id %}'" >Add Batch</button>
+                                {% if batch1 is not False %}
+                                    <button type="button" class="btn btn-custon-rounded-four btn-danger" style="margin-left: 1em;" onClick="location.href='{% url 'training:view_milestone' batch1.id %}'" >View Milestone</button>
+                                {%endif%}
+                            </div>
+
+                            <div id="toolbar">
+                                <select class="form-control dt-tb">
+                                    <option value="">Export Basic</option>
+                                    <option value="all">Export All</option>
+                                    <option value="selected">Export Selected</option>
+                                </select>
+                            </div>
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true",
+                                   data-show-columns="true" data-show-pagination-switch="true" ,
+
+                                   data-cookie-id-table="saveId" data-show-export="true" data-toolbar="#toolbar">
+                                <thead>
+
+                                <tr>
+                                    <th>Batch ID</th>
+                                    <th>Batch Name</th>
+                                    <th>Start date</th>
+                                    <th>End date</th>
+                                    <th>Trainer</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for bat in batch %}
+                                <tr>
+
+                                    <td>{{bat.id}}</td>
+                                    <td>{{bat.batch_name}}</td>
+                                    <td>{{bat.start_date}}</td>
+                                    <td>{{bat.end_date}}</td>
+                                    <td>{{bat.trainer.id}}</td>
+                                    {% if bat.status == True %}
+                                    <td>Active</td>
+                                    {% else %}
+                                    <td>Inactive</td>
+                                    {% endif %}
+
+                                    <td>
+                                        <form action="{% url 'training:view_batch' bat.id %}" method="POST">
+                                            {% csrf_token %}
+
+                                            <button type="submit" class="fa fa-eye" aria-hidden="true" ,
+                                                    onclick="{% url 'training:view_batch' bat.id %}"></button>
+                                        </form>
+                                    </td>
+
+                                    <td>
+                                        <form action="{% url 'training:edit_batch' bat.id %}" method="GET">
+                                            {% csrf_token %}
+                                            <button type="submit" class="fa fa-edit" ,
+                                                    onclick="{% url 'training:edit_batch' bat.id %}"></button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{% url 'training:delete_batch' bat.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <button type="submit" class="fa fa-trash" ,
+                                                    onclick="{% url 'training:delete_batch' bat.id %}"></button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{% url 'training:add_student' bat.id %}" method="GET">
+                                            {% csrf_token %}
+                                            <button type="submit"  ,
+                                                    onclick="{% url 'training:add_student' bat.id %}">Add student</button>
+                                        </form>
+                                    </td>
+
+
+                                    <td>
+                                        <form action="{% url 'training:view_progress' bat.id %}" method="GET">
+                                            {% csrf_token %}
+                                            <button type="submit"  ,
+                                                    onclick="{% url 'training:view_progress' bat.id %}">Progress</button>
+                                        </form>
+                                    </td>
+
+
+                                </tr>
+                                {% endfor%}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

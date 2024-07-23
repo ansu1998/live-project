@@ -1,0 +1,65 @@
+{% extends 'training/base.html' %}
+
+
+.list-group{
+max-height: 300px;
+margin-bottom: 10px;
+overflow:scroll;
+-webkit-overflow-scrolling: touch;
+}
+{% load static %}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+{% block content %}
+
+<div class="blog-details-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="blog-details-inner">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="latest-blog-single blog-single-full-view">
+
+
+                                <div class="Course details">
+                                    <h1 style="color:#da251e; align-item:center;text-align: center;
+                                       font-size: 3rem;"> {{batch.course.course_name}} By  {{batch.trainer.user.first_name}}: {{batch.batch_name}}</h1>
+                                </div>
+
+
+
+                                <div class="col-lg-06 col-md-12 col-sm-06 col-xs-06" >
+                                    <div class="panel panel-primary" id="result_panel" style="border-color: #da251e;" >
+                                        <div class="panel-heading" style=" background-color: #da251e; border-color: #da251e;"><h3 class="panel-title" style="background-color: #da251e; border-color: #da251e;">Batches Students</h3>
+                                        </div>
+                                        <div class="panel-body" style="text-align:center;">
+                                            <ul class="list-group">
+                                                {% for stud in student_dtl %}
+                                                <li class="list-group-item"  ><strong>{{stud.user.first_name}} {{stud.user.last_name}}</strong>
+                                                </li>
+                                                {% endfor%}
+
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <br>
+    <br>
+    <br>
+
+
+    {% endblock content %}

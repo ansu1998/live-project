@@ -1,0 +1,198 @@
+{% extends 'training/base.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+
+{% load static %}
+
+<!-- favicon
+  ============================================ -->
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'training/img/favicon.ico' %}">
+<!-- Google Fonts
+    ============================================ -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+<!-- Bootstrap CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/bootstrap.min.css' %}">
+<!-- Bootstrap CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/font-awesome.min.css' %}">
+<!-- owl.carousel CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static 'training/css/owl.theme.css' %}">
+<link rel="stylesheet" href="{% static 'training/css/owl.transitions.css' %}">
+<!-- animate CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/animate.css' %}">
+<!-- normalize CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/normalize.css' %}">
+<!-- meanmenu icon CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/meanmenu.min.css' %}">
+<!-- main CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/main.css' %}">
+<!-- educate icon CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/educate-custon-icon.css' %}">
+<!-- morrisjs CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/morrisjs/morris.css' %}">
+<!-- mCustomScrollbar CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/scrollbar/jquery.mCustomScrollbar.min.css' %}">
+<!-- metisMenu CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/metisMenu/metisMenu.min.css' %}">
+<link rel="stylesheet" href="css/metisMenu/metisMenu-vertical.css' %}">
+<!-- calendar CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/calendar/fullcalendar.min.css' %}">
+<link rel="stylesheet" href="{% static 'training/css/calendar/fullcalendar.print.min.css' %}">
+<!-- duallistbox CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/duallistbox/bootstrap-duallistbox.min.css' %}">
+<!-- style CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/style.css' %}">
+<!-- responsive CSS
+    ============================================ -->
+<link rel="stylesheet" href="{% static 'training/css/responsive.css' %}">
+<!-- modernizr JS
+    ============================================ -->
+<script src="{% static 'training/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+
+{% block content %}
+
+<div class="dual-list-box-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline10-list">
+                    <div class="sparkline10-hd">
+                        <div class="main-sparkline10-hd">
+                            <h1>Add Students</h1>
+                        </div>
+                    </div>
+                    <div class="sparkline10-graph">
+                        <div class="basic-login-form-ad">
+
+                            <div class="row">
+
+
+
+                                <form id="form" action="{% url 'training:add_student' id=batch_id%}" method="POST" class="wizard-big" >
+
+                                    {% csrf_token %}
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="dual-list-box-inner">
+                                            {% for std in students %}
+<!--                                            <label value="{{std.id}}">{{std.student_name}}</label>-->
+                                            {% endfor %}
+
+                                            <input type="text" id="student" , hidden name="student">
+                                            <select class="form-control dual_select" multiple>
+                                                {% for std in students %}
+                                                <option value="{{std.id}}">{{std.user__first_name}}</option>
+
+                                                {% endfor %}
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="payment-adress">
+                                                        <button type="submit"  class="btn btn-primary waves-effect waves-light" onclick="getStudents()">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><br><br><br>
+                                    </div>
+                                </form>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+        function getStudents() {
+
+
+            var arr =[];
+            var jk;
+            $('#bootstrap-duallistbox-selected-list_ option').each(function(){
+                jk= $(this).val();
+                arr.push(jk)
+            });
+
+            document.getElementById('student').value = arr;
+
+        }
+    </script>
+
+
+
+
+<!-- jquery
+		============================================ -->
+<script src="{% static 'training/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<!-- bootstrap JS
+    ============================================ -->
+<script src="{% static 'training/js/bootstrap.min.js' %}"></script>
+<!-- wow JS
+    ============================================ -->
+<script src="{% static 'training/js/wow.min.js' %}"></script>
+<!-- price-slider JS
+    ============================================ -->
+<script src="js/jquery-price-slider.js"></script>
+<!-- meanmenu JS
+    ============================================ -->
+<script src="{% static 'training/js/jquery.meanmenu.js' %}"></script>
+<!-- owl.carousel JS
+    ============================================ -->
+<script src="{% static 'training/js/owl.carousel.min.js"></script>
+<!-- sticky JS
+    ============================================ -->
+<script src="{% static 'training/js/jquery.sticky.js' %}"></script>
+<!-- scrollUp JS
+    ============================================ -->
+<script src="{% static 'training/js/jquery.scrollUp.min.js' %}"></script>
+<!-- mCustomScrollbar JS
+    ============================================ -->
+<script src="{% static 'training/js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script src="{% static 'training/js/scrollbar/mCustomScrollbar-active.js' %}"></script>
+<!-- metisMenu JS
+    ============================================ -->
+<script src="{% static 'training/js/metisMenu/metisMenu.min.js' %}"></script>
+<script src="{% static 'training/js/metisMenu/metisMenu-active.js' %}"></script>
+<!-- duallistbox JS
+    ============================================ -->
+<script src="{% static 'training/js/duallistbox/jquery.bootstrap-duallistbox.js' %}"></script>
+<script src="{% static 'training/js/duallistbox/duallistbox.active.js' %}"></script>
+<!-- tab JS
+    ============================================ -->
+<script src="{% static 'training/js/tab.js' %}"></script>
+<!-- plugins JS
+    ============================================ -->
+<script src="{% static 'training/js/plugins.js' %}"></script>
+<!-- main JS
+    ============================================ -->
+<script src="{% static 'training/js/main.js' %}"></script>
+<!-- tawk chat JS
+    ============================================ -->
+<script src="{% static 'training/js/tawk-chat.js' %}"></script>
+{% endblock content %}

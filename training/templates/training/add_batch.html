@@ -1,0 +1,121 @@
+{% extends 'training/base.html' %}
+
+
+{% block content %}
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div class="product-payment-inner-st">
+                    <ul id="myTabedu1" class="tab-review-design">
+                        <li class="active"><a href="#description">Batch Form</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content custom-product-edit">
+
+                        <div class="product-tab-list tab-pane fade active in" id="description">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="review-content-section">
+                                        <div id="dropzone1" class="pro-ad addcoursepro">
+                                            <form action="{% url 'training:add_batch' course_id%}" method = "post" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" name="add_batch">
+
+                                                {% csrf_token%}
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="form-group">
+                                                            <input name="bname" type="text" class="form-control" style="width: 21.4rem;margin-left: 15px;" placeholder="Batch Name" required>
+                                                        </div>
+                                                        <div class="form-group">
+
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="form-select-list">
+                                                                    <select class="form-control custom-select-value" name="trainer" style="width: 257pt;"  >
+                                                                        <option>Choose Trainer</option>
+                                                                        {% for tr in trainer %}
+                                                                        <option value="{{ tr.id }}">{{ tr.user__first_name}}{{ tr.user__last_name}}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+
+                                                        <div style="padding-top: 35px;margin-bottom: -13pt;margin-left: 10pt;" >
+
+                                                            Start Date :
+                                                        </div>
+                                                        <div class="form-group">
+
+
+
+
+                                                            <div class="form-group data-custon-pick" >
+
+                                                                <div class="input-group date" style="padding-top: 13px;width: 24.56em;left: 14px;" id="sdate" >
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                    <input type="date" class="form-control" value="sdate" placeholder="Start Date" name="sdate">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="padding-top: 10px;
+margin-bottom: -5pt;
+margin-left: 10pt;" >
+
+                                                            End  Date :
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="form-group data-custon-pick" id="data_1">
+                                                                <div class="input-group date" style="padding-top: 5px;width: 24.56em;left: 14px;" id="edate">
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                    <input type="date" class="form-control" value="edate" placeholder="End Date" name="edate">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <input type="radio" value="True" name="status" checked > Active
+                                                            <input type="radio" value="False" name="status"> Inactive
+                                                        </div>
+
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="payment-adress">
+                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light" onclick="validateForm()">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+{% endblock content %}
+<script>
+    function validateForm()
+{
+
+var d=document.forms["add_batch"]["trainer"].value;
+var e=document.forms["add_batch"]["bname"].value;
+
+if(d="Choose Trainer"||e="")
+{
+    alert("Please Enter All the Fields");
+    return false;
+}
+}
+</script>

@@ -1,0 +1,107 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+
+<div class="data-table-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline13-list">
+                            <div class="sparkline13-hd"><br><br>
+                                <div class="main-sparkline13-hd">
+                                    <h1>Course <span class="table-project-n">Data</span> Table</h1>
+                                </div>
+                            </div><br>
+                            <form>
+                                {% csrf_token %}
+                            </form>
+                            <div class="sparkline13-graph">
+                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                    <div id="toolbar">
+                                        <select class="form-control dt-tb">
+											<option value="">Export Basic</option>
+											<option value="all">Export All</option>
+											<option value="selected">Export Selected</option>
+										</select>
+                                    </div>
+<!--                                    {% for value in context %}-->
+<!--                                    <label>{{value.id}}</label>-->
+<!--                                    {% endfor %}-->
+<!--                                     {% for values in batch_obj %}-->
+<!--                                     <label>{{values.course__course_name}}</label>-->
+
+
+<!--                                    {% endfor %}-->
+<!--&lt;!&ndash;                                    <label>{{student_batch_obj}}</label>&ndash;&gt;-->
+<!--                                    <label>{{batch_obj}}</label>-->
+
+                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true"  data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                        <thead>
+                                            <tr>
+<!--                                                <th data-field="state" data-checkbox="true"></th>-->
+<!--                                                <th data-field="id">ID</th>-->
+                                                <th data-field="fname" data-editable="true">Course</th>
+                                                <th data-field="lname" data-editable="true">Duration</th>
+                                                <th data-field="email" data-editable="true">Batch</th>
+<!--                                                <th data-field="phone" data-editable="true"></th>-->
+<!--                                                <th data-field="date">Created date</th>-->
+<!--                                                <th data-field="status" data-editable="true">S</th>-->
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        {% for val in batch_details  %}
+
+
+                                            <tr>
+
+                                                <td>{{val.course__course_name}}</td>
+                                                <td>{{val.course__course_duration}}</td>
+
+                                                <td>{{val.id}}</td>
+                                                <td><form action="{% url 'student:studentviewcourse' val.course__id %}" method="GET">
+                                                         {% csrf_token %}
+                                                        <button type="submit" class="btn btn-custon-rounded-four btn-danger"
+                                                                onclick="">Course Details</button>
+                                                     </form>
+                                                </td>
+                                                <td><form action="{% url 'student:studenttrainerview' val.trainer_id%}" method="GET">
+                                                         {% csrf_token %}
+                                                        <button type="submit" class="btn btn-custon-rounded-four btn-danger"
+                                                                onclick="">Trainer</button>
+                                                     </form></td>
+
+                                                <td><form action="{% url 'student:feedback' val.student_id val.id val.course__id %}" method="GET">
+                                                         {% csrf_token %}
+
+                                                        <button type="submit" class="btn btn-custon-rounded-four btn-danger"
+                                                                onclick="">Feedback</button>
+                                                     </form>
+                                                </td>
+
+
+<!--                                                <td><form action="" method="GET">-->
+<!--                                                         {% csrf_token %}-->
+<!--                                                        <button type="submit"  ,-->
+<!--                                                                onclick="">Add student</button>-->
+<!--                                                     </form></td>-->
+
+                                            </tr>
+                                        {% endfor %}
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}
